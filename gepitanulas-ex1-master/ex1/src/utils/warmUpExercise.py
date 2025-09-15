@@ -12,7 +12,7 @@ def warmUpExercise():
     #               In octave, we return values by defining which variables
     #               represent the return values (at the top of the file)
     #
-
+    A = numpy.eye(5)
 
 
     # ===========================================

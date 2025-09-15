@@ -17,7 +17,6 @@ def plotData(x, y):
     #       appear as red crosses. Furthermore, you can make the
     #       markers larger by using plot(..., 'rx', 'MarkerSize', 10);
 
-
-
     # ============================================================
-    plt.plot(x, y, 'r*') # this line is necessary for see trend line and data together
+    plt.plot(x, y, 'r*', 'MarkerSize', 10) # this line is necessary for see trend line and data together
+    plt.show()
