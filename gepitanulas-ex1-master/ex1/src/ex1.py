@@ -43,7 +43,7 @@ def ex1():
 
     # Plot Data
     # Note: You have to complete the code in plotData.m
-    plotData(X, y)
+    # plotData(X, y)
 
     print('Program paused. Press enter to continue.\n')
     input()

@@ -18,12 +18,13 @@ def gradientDescent(X, y, theta, alpha, num_iters):
         # Hint: While debugging, it can be useful to print out the values
         #       of the cost function (computeCost) and gradient here.
         #
-        # tmp = [0 0];
-        # tmp(1) = theta(1) - alpha*(sum((X*theta-y)*X(:,1)')/m);
-        # tmp(2) = theta(2) - alpha*(sum((X*theta-y)*X(:,2)')/m);
-        # theta = tmp;
-
-
+        predictions = X.dot(theta)
+        
+        # Calculate errors
+        errors = predictions - y
+        
+        # Update theta using vectorized operations
+        theta = theta - (alpha / m) * (X.T.dot(errors))
 
         # ============================================================
 
