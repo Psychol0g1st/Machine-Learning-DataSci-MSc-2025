@@ -83,8 +83,8 @@ Hint: At prediction, make sure you do the same feature normalization.
 
 print('Running gradient descent ...')
 # Choose some alpha value
-alpha = 0.01
-num_iters = 400
+alpha = 0.001
+num_iters = 5000
 
 # Init theta and Run Gradient Descent
 theta = np.zeros(3)
