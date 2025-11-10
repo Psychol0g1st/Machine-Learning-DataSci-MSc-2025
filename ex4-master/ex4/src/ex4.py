@@ -115,6 +115,12 @@ def ex4():
     
     J, _ = nnCostFunction(nn_params, input_layer_size, hidden_layer_size, num_labels, X, y, Lambda)
     
+    pred = predict(Theta1, Theta2, X)
+    predList = np.array(pred).flatten().tolist()
+    yList = np.array(y).flatten().tolist()
+    accuracy = np.mean(np.double(np.equal(predList, yList)*1)) * 100
+    print('Training Set Accuracy: %f\n'% accuracy)
+    
     print('Cost at parameters (loaded from ex4weights): %f \n(this value should be about 0.383670)' % J)
     
     input("Program paused. Press Enter to continue...")

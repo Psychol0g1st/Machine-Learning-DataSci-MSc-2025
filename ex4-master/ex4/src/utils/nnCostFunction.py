@@ -66,20 +66,36 @@ def nnCostFunction(nn_params, input_layer_size, hidden_layer_size, num_labels, X
     a2 = np.c_[np.ones(m),a2]
     in2 = a2.dot(Theta2.T)
     hyp = sigmoid(in2)
-    y_matrix = np.zeros((m,num_labels))
     J=0
     for i in range(m):
-        y_matrix[i,y[i]-1] = 1
-        J = -1/m * np.sum(y_matrix * np.log(h) + (1-y_matrix) * np.log(1-h))
-        reg = Lambda/(2*m) * (np.sum(np.square(Theta1[:,1:])) + np.sum(np.square(Theta2[:,1:])))
-        J = J + reg
+        one_hot = np.zeros(num_labels)
+        one_hot[y[i]-1] = 1
+        J += -one_hot.dot(np.log(hyp[i,:])) - (1 - one_hot).dot(np.log(1 - hyp[i,:]))
+    J/= m
     
+    reg_cost = (Lambda / (2 * m)) * (np.sum(np.square(Theta1[:, 1:])) + np.sum(np.square(Theta2[:, 1:])))
+    J += reg_cost
+    # reg = np.sum(np.square(Theta1[:,1:])) + np.sum(np.square(Theta2[:,1:]))/(2*m)
+    # J+= Lambda*reg
     
+    #Backpropagation
+    for i in range(m):
+        one_hot = np.zeros(num_labels)
+        one_hot[y[i]-1] = 1
+        delta3 = hyp[i,:] - one_hot
+        delta2 = Theta2.T.dot(delta3) * sigmoidGradient(np.r_[1, in1[i,:]])
+        
+        Theta1_grad += np.outer(delta2[1:], X[i,:])
+        Theta2_grad += np.outer(delta3, a2[i,:])
+    Theta1_grad /= m
+    Theta2_grad /= m
+    
+    Theta1_grad[:,1:] += (Lambda/m)*Theta1[:,1:]
+    Theta2_grad[:,1:] += (Lambda/m)*Theta2[:,1:]
     
     
 
     # =========================================================================
-
     # Unroll gradient
     grad = np.hstack((Theta1_grad.T.ravel(), Theta2_grad.T.ravel()))
 
