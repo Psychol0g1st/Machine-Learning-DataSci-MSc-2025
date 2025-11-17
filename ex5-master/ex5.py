@@ -103,6 +103,7 @@ def ex5():
     plot.title('Learning curve for linear regression')
     plot.xlabel('Number of training examples')
     plot.ylabel('Error')
+    plot.legend(['Train loss', 'Validation loss'])
     plot.show()
 
     print('# Training Examples\tTrain Error\tCross Validation Error')

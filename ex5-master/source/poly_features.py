@@ -17,7 +17,7 @@ def poly_features(X, power=8):
     X_flat = X.flatten()
 
     # Loop from the first power (1) up to 'power'
-    for p in range(1, power + 1):
+    for p in range(0, power + 1):
         # p-1 is the 0-based column index
         X_poly[:, p - 1] = X_flat ** p
 

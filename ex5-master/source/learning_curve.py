@@ -54,7 +54,7 @@ def learning_curve(X, y, Xval, yval, lambda_):
           end
     
     """
-    for i in range(1, m + 1):
+    for i in range(1, m + 2):
         
         # 1. Select the first 'i' training examples
         X_train_sub = X[0:i, :]
@@ -67,14 +67,14 @@ def learning_curve(X, y, Xval, yval, lambda_):
         # 3. Compute training error
         #    Use the *subset* of data (X_train_sub, y_train_sub)
         #    Use lambda = 0 for error calculation, as instructed.
-        train_cost, _ = linear_cost_function_reg(theta, X_train_sub, y_train_sub, 0)
-        err_train[i] = train_cost
+        train_cost, _ = linear_cost_function_reg(theta, X_train_sub, y_train_sub, lambda_)
+        err_train[i-1] = train_cost
         
         # 4. Compute cross-validation error
         #    Use the *entire* validation set (Xval, yval)
         #    Use lambda = 0 for error calculation, as instructed.
-        val_cost, _ = linear_cost_function_reg(theta, Xval, yval, 0)
-        err_val[i] = val_cost
+        val_cost, _ = linear_cost_function_reg(theta, Xval, yval, lambda_)
+        err_val[i-1] = val_cost
 
     # =============================================================
 
