@@ -54,29 +54,10 @@ def learning_curve(X, y, Xval, yval, lambda_):
           end
     
     """
-    for i in range(1, m + 2):
-        
-        # 1. Select the first 'i' training examples
-        X_train_sub = X[0:i, :]
-        y_train_sub = y[0:i]
-        
-        # 2. Train the model on this subset to get theta
-        #    We use the given lambda_ for this training.
-        theta = train_linear_regression(X_train_sub, y_train_sub, lambda_)
-        
-        # 3. Compute training error
-        #    Use the *subset* of data (X_train_sub, y_train_sub)
-        #    Use lambda = 0 for error calculation, as instructed.
-        train_cost, _ = linear_cost_function_reg(theta, X_train_sub, y_train_sub, lambda_)
-        err_train[i-1] = train_cost
-        
-        # 4. Compute cross-validation error
-        #    Use the *entire* validation set (Xval, yval)
-        #    Use lambda = 0 for error calculation, as instructed.
-        val_cost, _ = linear_cost_function_reg(theta, Xval, yval, lambda_)
-        err_val[i-1] = val_cost
+    for i in range(1,m+2):
+        theta = train_linear_regression(X[0:i,:], y[0:i], lambda_)
+        err_train[i-1],_ = linear_cost_function_reg(theta,X[0:i,:], y[0:i], lambda_)
+        err_val[i-1],_ = linear_cost_function_reg(theta,Xval, yval, lambda_)
 
-    # =============================================================
 
-    # We return the arrays, skipping the 0-th element which was unused.
     return err_train, err_val

@@ -1,0 +1,6 @@
+scipy
+matplotlib
+nltk
+sklearn
+
+numpy==1.19.3

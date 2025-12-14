@@ -1,0 +1,10 @@
+# Default ignored files
+/inspectionProfiles
+/workspace.xml
+/misc.xml
+/modules.xml
+/vcs.xml
+/gepitan-ex7.iml
+**/*.trash
+**/*.old
+**/*.bkp

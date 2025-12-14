@@ -44,6 +44,7 @@ def ex5():
 
     m = X.shape[0]
     plot.plot(X, y, 'rx', markersize=10)
+    plot.plot(Xval, yval, 'bo', markersize=10)
     plot.xlabel('Change in water level (x)')
     plot.ylabel('Water flowing out of the dam (y)')
     plot.show()

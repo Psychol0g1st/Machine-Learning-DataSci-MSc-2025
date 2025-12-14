@@ -39,26 +39,4 @@ def validation_curve(X, y, Xval, yval):
           end
     """
 
-
-    for i, lambda_test in enumerate(lambda_vec):
-        
-        # 1. Train the model using the current lambda_test
-        #    This gives us the optimal theta for this lambda
-        theta = train_linear_regression(X, y, lambda_test)
-        
-        # 2. Calculate the training error
-        #    Use the trained theta
-        #    IMPORTANT: Use lambda = 0 for the cost function
-        #    (we want the raw error, not the regularized cost)
-        train_cost, _ = linear_cost_function_reg(theta, X, y, 0)
-        error_train[i] = train_cost
-        
-        # 3. Calculate the validation error
-        #    Use the same trained theta
-        #    IMPORTANT: Use lambda = 0 for the cost function
-        val_cost, _ = linear_cost_function_reg(theta, Xval, yval, 0)
-        error_val[i] = val_cost
-
-    # ============================================================
-
     return lambda_vec, error_train, error_val

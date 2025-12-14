@@ -19,19 +19,13 @@ def linear_cost_function_reg(theta, X, y, lambda_):
                   You should set J to the cost and grad to the gradient.
     
     """
-    
-    h = X.dot(theta)
-    errors = h - y
-    
-    J_unreg = (1 / (2 * m)) * np.sum(np.square(errors))
-    
-    reg_cost_term = (lambda_ / (2 * m)) * np.sum(np.square(theta[1:]))
-    
-    cost = J_unreg + reg_cost_term
-    
-    grad_unreg = (1 / m) * (X.T.dot(errors))
-    reg_grad_term = (lambda_ / m) * theta
-    reg_grad_term[0] = 0  # Set the bias term's regularization to zero
-    gradient = grad_unreg + reg_grad_term
+      
+    hyp = X.dot(theta)
+    cost = np.sum((hyp-y)**2) * (1/(2*m))
+    reg = np.sum(theta[1:]**2)/(2*m)
+    cost += lambda_*reg
+
+    gradient = (hyp-y).dot(X)/m
+    gradient[1:] += lambda_*(theta[1:]/m)
 
     return cost, gradient

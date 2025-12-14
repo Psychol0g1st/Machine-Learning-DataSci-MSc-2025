@@ -25,7 +25,26 @@ def predict_nn(theta1, theta2, X):
           p = np.argmax(output, axis=1)  #  returns a vector with the index of each column's maximum element
           ```
     """
+    
+    # 1. Input Layer (a1) -> Hidden Layer
+    # Add bias unit (column of ones) to X. Shape becomes (m, n+1)
+    a1 = np.c_[np.ones(m), X]
+    
+    # Calculate z2 and activation a2
+    z2 = a1.dot(theta1.T)
+    a2 = sigmoid(z2)
 
-    #  index 0 means it's in class 1
-    p = np.zeros(m)
+    # 2. Hidden Layer (a2) -> Output Layer
+    # Add bias unit to the hidden layer activations. Shape becomes (m, hidden_units+1)
+    a2 = np.c_[np.ones(m), a2]
+    
+    # Calculate z3 and final hypothesis h_theta
+    z3 = a2.dot(theta2.T)
+    h_theta = sigmoid(z3)
+
+    # 3. Prediction
+    # np.argmax returns the index (0, 1, 2...) of the max value.
+    # Since your labels are likely 1-indexed (1 to 10), we add +1 to the result.
+    p = np.argmax(h_theta, axis=1) + 1
+
     return p

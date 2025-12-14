@@ -8,20 +8,12 @@ def poly_features(X, power=8):
       X_poly(i, :) = [X(i) X(i).^2 X(i).^3 ...  X(i).^p];
 
     """
-    X_poly = np.zeros((X.shape[0],power))
+    X_poly = np.zeros((X.shape[0],power+1))
 
     """% ====================== YOUR CODE HERE ======================
     Instructions: Given a vector X, return a matrix X_poly where the p-th 
             column of X contains the values of X to the p-th power.
     """
-    X_flat = X.flatten()
-
-    # Loop from the first power (1) up to 'power'
-    for p in range(0, power + 1):
-        # p-1 is the 0-based column index
-        X_poly[:, p - 1] = X_flat ** p
-
-    # ============================================================
-
-    # Return the (m x p) matrix
+    for i in range(0,power+1):
+        X_poly[:,i]=X**i
     return X_poly

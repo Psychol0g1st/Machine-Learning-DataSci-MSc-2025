@@ -1,6 +1,7 @@
 import numpy as np
 import imageio
 from os import getcwd, path
+from PIL import Image
 
 
 def load_own_image(name):
@@ -14,7 +15,10 @@ def load_own_image(name):
     print('Loading image:', name)
 
     file_name = path.join(getcwd(), 'ex3', 'src', 'data', name)
-    img = imageio.imread(file_name)
+    img = Image.open(file_name).convert('L').resize((20, 20))
+    
+    # Convert to numpy array
+    img = np.asarray(img)
 
     # reshape 20x20 grayscale image to a vector
-    return np.reshape(img.T / 255, (1, 400))
+    return np.reshape(img.T / 255.0, (1, 400))

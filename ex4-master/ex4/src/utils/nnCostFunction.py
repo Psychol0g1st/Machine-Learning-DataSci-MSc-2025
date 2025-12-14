@@ -73,8 +73,8 @@ def nnCostFunction(nn_params, input_layer_size, hidden_layer_size, num_labels, X
         J += -one_hot.dot(np.log(hyp[i,:])) - (1 - one_hot).dot(np.log(1 - hyp[i,:]))
     J/= m
     
-    reg_cost = (Lambda / (2 * m)) * (np.sum(np.square(Theta1[:, 1:])) + np.sum(np.square(Theta2[:, 1:])))
-    J += reg_cost
+    reg_cost = (np.sum(np.square(Theta1[:, 1:])) + np.sum(np.square(Theta2[:, 1:]))) / (2 * m)
+    J += Lambda * reg_cost
     # reg = np.sum(np.square(Theta1[:,1:])) + np.sum(np.square(Theta2[:,1:]))/(2*m)
     # J+= Lambda*reg
     
